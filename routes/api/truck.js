@@ -1,4 +1,5 @@
 const express = require("express");
+const { user } = require("pg/lib/defaults");
 const router = express.Router();
 const Truck = require("../../models/Truck");
 const TruckType = require("../../models/TruckType");
@@ -45,19 +46,15 @@ router.post("/", (req, res) => {
 
 // Update Member
 router.put("/:id", (req, res) => {
-  const found = members.some(idFilter(req));
-
-  if (found) {
-    members.forEach((member, i) => {
-      if (idFilter(req)(member)) {
-        const updMember = { ...member, ...req.body };
-        members[i] = updMember;
-        res.json({ msg: "Member updated", updMember });
-      }
-    });
-  } else {
-    res.status(400).json({ msg: `No member with the id of ${req.params.id}` });
-  }
+  const updatedData = {
+    ...req.body,
+  };
+  Truck.update(updatedData, {
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.status(200).json({ msg: "updated" });
 });
 
 // Delete Member
