@@ -1,5 +1,4 @@
 const express = require("express");
-const { user } = require("pg/lib/defaults");
 const router = express.Router();
 const Truck = require("../../models/Truck");
 const TruckType = require("../../models/TruckType");
