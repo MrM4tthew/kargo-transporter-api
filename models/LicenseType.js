@@ -20,7 +20,12 @@ const LicenseType = db.define("LicenseType", {
 //     onDelete: "cascade",
 //   });
 // };
-
-LicenseType.hasMany(Truck);
+LicenseType.associate = function (models) {
+  LicenseType.hasMany(models.Truck, {
+    foreignKey: "licensetype_id",
+    as: "truckDetails",
+  });
+};
+// LicenseType.hasMany(Truck);
 
 module.exports = LicenseType;

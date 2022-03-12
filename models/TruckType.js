@@ -21,6 +21,11 @@ const TruckType = db.define("TruckType", {
 //   });
 // };
 
-TruckType.hasMany(Truck);
+TruckType.associate = function (models) {
+  TruckType.hasMany(models.Truck, {
+    foreignKey: "trucktype_id",
+    as: "truckDetails",
+  });
+};
 
 module.exports = TruckType;

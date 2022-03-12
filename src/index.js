@@ -35,6 +35,7 @@ app.use(
 
 app.use("/trucks", require("../routes/api/truck"));
 app.use("/licensetype", require("../routes/api/licensetype"));
+app.use("/trucktype", require("../routes/api/trucktype"));
 
 app.get("/", (request, response) => {
   response.json({ info: "Node.js, Express, and Postgres API" });

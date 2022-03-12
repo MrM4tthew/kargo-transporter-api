@@ -26,21 +26,45 @@ const Truck = db.define("Truck", {
     type: Sequelize.STRING,
     allowNull: true,
   },
-  // trucktype_id: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false,
-  //   references: "TruckType",
-  //   referencesKey: "id",
-  // },
-  // licensetype_id: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false,
-  //   references: "LicenseType",
-  //   referencesKey: "id",
-  // },
+  trucktype_id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    references: {
+      model: "TruckTypes",
+      key: "id",
+    },
+    field: "trucktype_id",
+  },
+  licensetype_id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    references: {
+      model: "LicenseTypes",
+      key: "id",
+    },
+    field: "licensetype_id",
+  },
 });
 
 // Truck.belongsTo(TruckType);
 // Truck.belongsTo(LicenseType);
+Truck.associate = function (models) {
+  // Truck.belongsTo(models.LicenseType, {
+  //   foreignKey: "trucktype_id",
+  // }),
+  Truck.belongsTo(models.TruckTypes, {
+    foreignKey: "trucktype_id",
+    onDelete: "CASCADE",
+  });
+};
+Truck.associate = function (models) {
+  // Truck.belongsTo(models.LicenseType, {
+  //   foreignKey: "trucktype_id",
+  // }),
+  Truck.belongsTo(models.LicenseTypes, {
+    foreignKey: "licensetype_id",
+    onDelete: "CASCADE",
+  });
+};
 
 module.exports = Truck;
