@@ -26,16 +26,16 @@ router.post("/", (req, res) => {
 
   if (
     !newData.license_number ||
-    !newData.production_year ||
-    !newData.TruckTypeId ||
-    !newData.LicenseTypeId
+    !newData.production_year
+    // ||
+    // !newData.TruckTypeId ||
+    // !newData.LicenseTypeId
   ) {
     res.status(400).json({ msg: "Some data is missing" });
   } else {
-    Truck.create({ name: req.body.name }).then((submitedData) =>
-      res.json(submitedData)
-    );
+    Truck.create(newData).then((submitedData) => res.json(submitedData));
   }
+  Truck.findAll().then((truck) => res.json(truck));
 });
 
 // Update Member

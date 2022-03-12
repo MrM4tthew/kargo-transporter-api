@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../config/database");
-const TruckType = require("./TruckType");
-const LicenseType = require("./LicenseType");
+// const TruckType = require("./TruckType");
+// const LicenseType = require("./LicenseType");
 
 const Truck = db.define("Truck", {
   id: {
